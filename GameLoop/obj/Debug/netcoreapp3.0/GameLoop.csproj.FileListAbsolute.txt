@@ -1,0 +1,11 @@
+C:\Users\andre\source\repos\LPAula11\GameLoop\bin\Debug\netcoreapp3.0\GameLoop.exe
+C:\Users\andre\source\repos\LPAula11\GameLoop\bin\Debug\netcoreapp3.0\GameLoop.deps.json
+C:\Users\andre\source\repos\LPAula11\GameLoop\bin\Debug\netcoreapp3.0\GameLoop.runtimeconfig.json
+C:\Users\andre\source\repos\LPAula11\GameLoop\bin\Debug\netcoreapp3.0\GameLoop.runtimeconfig.dev.json
+C:\Users\andre\source\repos\LPAula11\GameLoop\bin\Debug\netcoreapp3.0\GameLoop.dll
+C:\Users\andre\source\repos\LPAula11\GameLoop\bin\Debug\netcoreapp3.0\GameLoop.pdb
+C:\Users\andre\source\repos\LPAula11\GameLoop\obj\Debug\netcoreapp3.0\GameLoop.csprojAssemblyReference.cache
+C:\Users\andre\source\repos\LPAula11\GameLoop\obj\Debug\netcoreapp3.0\GameLoop.AssemblyInfoInputs.cache
+C:\Users\andre\source\repos\LPAula11\GameLoop\obj\Debug\netcoreapp3.0\GameLoop.AssemblyInfo.cs
+C:\Users\andre\source\repos\LPAula11\GameLoop\obj\Debug\netcoreapp3.0\GameLoop.dll
+C:\Users\andre\source\repos\LPAula11\GameLoop\obj\Debug\netcoreapp3.0\GameLoop.pdb
