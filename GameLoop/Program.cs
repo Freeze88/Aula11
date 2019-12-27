@@ -1,16 +1,10 @@
-﻿using System;
-using System.Threading;
-using System.Collections.Concurrent;
-
-namespace GameLoop
+﻿namespace GameLoop
 {
     class Program
     {
-        private static BlockingCollection<ConsoleKey> input;
-
-        static void Main(string[] args)
+        private static void Main()
         {
-            GameLoop game = new GameLoop();
+            _ = new GameLoop();
         }
     }
 }

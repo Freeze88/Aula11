@@ -4,7 +4,7 @@ namespace DoubleBuffer2D
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             DoubleBuffer2D<char> buffer = new DoubleBuffer2D<char>(5, 5);
 
@@ -25,13 +25,13 @@ namespace DoubleBuffer2D
             buffer[2, 2] = 'X';
             buffer[3, 2] = 'X';
             buffer[4, 2] = 'x';
-            
+
             buffer[0, 3] = ' ';
             buffer[1, 3] = 'x';
             buffer[2, 3] = 'X';
             buffer[3, 3] = 'x';
-            buffer[4, 3] = ' '; 
-            
+            buffer[4, 3] = ' ';
+
             buffer[0, 4] = ' ';
             buffer[1, 4] = ' ';
             buffer[2, 4] = 'x';

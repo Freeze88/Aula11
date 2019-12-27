@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace DoubleBuffer2D 
+namespace DoubleBuffer2D
 {
     class DoubleBuffer2D<T>
     {
         private T[,] _current;
         private T[,] _next;
 
-        public int XDim { get => _next.GetLength(0); }
-        public int YDim { get => _next.GetLength(0); }
+        public int XDim => _next.GetLength(0);
+        public int YDim => _next.GetLength(0);
 
         public T this[int x, int y]
         { get => _current[x, y]; set => _next[x, y] = value; }
@@ -25,7 +23,7 @@ namespace DoubleBuffer2D
 
         public void Clear()
         {
-            Array.Clear(_next, 0, (XDim * YDim) -1);
+            Array.Clear(_next, 0, (XDim * YDim) - 1);
         }
 
         public void Swap()

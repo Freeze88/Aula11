@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GameLoop
+﻿namespace GameLoop
 {
-    class Snake
+    class Snake : MapPiece
     {
-        public int length { get; set; }
-        public int posX { get; set; }
-        public int posY { get; set; }
-        public char visuals { get; }
-
         public Snake()
         {
-            posX = 0;
-            posY = 0;
-            length = 0;
-            visuals = '#';
+            PosX = 2;
+            PosY = 1;
+            Visuals = '#';
+            BoxCollider = new int[4] { PosX, PosY, PosX + 1, PosY + 1 };
         }
     }
 }
