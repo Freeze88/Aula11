@@ -5,9 +5,15 @@
         public int[] BoxCollider;
         public int PosX { get; set; }
         public int PosY { get; set; }
-        public char Visuals { get; protected set; }
+        public char Visuals { get; set; }
 
-        public void UpdatePhysics(Snake s)
+        public int g_Cost = 0;
+
+        public int h_Cost = 0;
+        public int f_Cost { get => g_Cost + h_Cost; }
+
+        public MapPiece parent;
+        public void UpdatePhysics(MapPiece s)
         {
             BoxCollider[0] = s.PosX;
             BoxCollider[1] = s.PosY;
