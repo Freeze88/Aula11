@@ -4,10 +4,9 @@
     {
         public Snake()
         {
-            PosX = 25;
-            PosY = 1;
+            position = new Vector2(25, 1);
             Visuals = 'c';
-            BoxCollider = new int[4] { PosX, PosY, PosX + 1, PosY + 1 };
+            BoxCollider = new int[4] { position.PosX, position.PosY, position.PosX + 1, position.PosY + 1 };
         }
     }
 }

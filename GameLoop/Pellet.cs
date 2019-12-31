@@ -4,10 +4,9 @@
     {
         public Pellet(int x, int y)
         {
-            PosX = x;
-            PosY = y;
+            position = new Vector2(x, y);
             Visuals = '.';
-            BoxCollider = new int[4] { PosX, PosY, PosX + 1, PosY + 1 };
+            BoxCollider = new int[4] { x, y, x + 1, y + 1 };
         }
     }
 }

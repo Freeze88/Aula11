@@ -1,11 +1,11 @@
 ﻿namespace GameLoop
 {
-    class Teleporter : MapPiece
+    class EmptySpace : MapPiece
     {
-        public Teleporter(int x, int y)
+        public EmptySpace(int x, int y)
         {
             position = new Vector2(x, y);
-            Visuals = 'T';
+            Visuals = 'E';
             BoxCollider = new int[4] { x, y, x + 1, y + 1 };
         }
     }

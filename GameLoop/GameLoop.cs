@@ -20,63 +20,40 @@ namespace GameLoop
         private readonly List<MapPiece> physicsObjects = new List<MapPiece>();
         private readonly PhysicsCollision col;
         private readonly Snake snake = new Snake();
-        private readonly Ghost ghost;
+        private readonly Ghost redGhost;
         public int Score { get; set; }
 
         private readonly string mapBuilder =
-        //" OOOOOOOOOOOOOOOOOOOOOOOOOOO" +
-        //" O............O............O" +
-        //" O.OOOO.OOOOO.O.OOOOO.OOOO.O" +
-        //" O.........................O" +
-        //" O.OOOO.OO.OOOOOOO.OO.OOOO.O" +
-        //" O......OO....O....OO......O" +
-        //" OOOOOO.OOOOO.O.OOOOO.OOOOOO" +
-        //"      O.OO         OO.O     " +
-        //"      O.OO         OO.O     " +
-        //" OOOOOO.OO         OO.OOOOOO" +
-        //" T     .             .     T" +
-        //" OOOOOO.OO         OO.OOOOOO" +
-        //"      O.OO         OO.O     " +
-        //"      O.OO         OO.O     " +
-        //" OOOOOO.OO OOOOOOO OO.OOOOOO" +
-        //" O............O............O" +
-        //" O.OOOO.OOOOO.O.OOOOO.OOOO.O" +
-        //" O...OO...............OO...O" +
-        //" OOO.OO.OO.OOOOOOO.OO.OO.OOO" +
-        //" O......OO....O....OO......O" +
-        //" O.OOOOOOOOOO.O.OOOOOOOOOO.O" +
-        //" O.........................O" +
-        //" OOOOOOOOOOOOOOOOOOOOOOOOOOO";
-        " OOOOOOOOOOOOOOOOOOOOOOOOOOO" +
-    " O............O............O" +
-    " O.OOOO.OOOOO.O.OOOOO.OOOO.O" +
-    " O.........................O" +
-    " O.OOOO.OO.OOOOOOO.OO.OOOO.O" +
-    " O......OO....O....OO......O" +
-    " OOOOOO.OOOOO.O.OOOOO.OOOOOO" +
-    "      O.OO.........OO.O     " +
-    "      O.OO.........OO.O     " +
-    " OOOOOO.OO.........OO.OOOOOO" +
-    " T........................ T" +
-    " OOOOOO.OO.........OO.OOOOOO" +
-    "      O.OO.........OO.O     " +
-    "      O.OO.........OO.O     " +
-    " OOOOOO.OO OOOOOOO OO.OOOOOO" +
-    " O............O............O" +
-    " O.OOOO.OOOOO.O.OOOOO.OOOO.O" +
-    " O...OO...............OO...O" +
-    " OOO.OO.OO.OOOOOOO.OO.OO.OOO" +
-    " O......OO....O....OO......O" +
-    " O.OOOOOOOOOO.O.OOOOOOOOOO.O" +
-    " O.........................O" +
-    " OOOOOOOOOOOOOOOOOOOOOOOOOOO";
+        "OOOOOOOOOOOOOOOOOOOOOOOOOOO" +
+        "O............O............O" +
+        "O.OOOO.OOOOO.O.OOOOO.OOOO.O" +
+        "O.........................O" +
+        "O.OOOO.OO.OOOOOOO.OO.OOOO.O" +
+        "O......OO....O....OO......O" +
+        "OOOOOO.OOOOO.O.OOOOO.OOOOOO" +
+        "     O.OO         OO.O     " +
+        "     O.OO         OO.O     " +
+        "OOOOOO.OO         OO.OOOOOO" +
+        "T     .             .     T" +
+        "OOOOOO.OO         OO.OOOOOO" +
+        "     O.OO         OO.O     " +
+        "     O.OO         OO.O     " +
+        "OOOOOO.OO OOOOOOO OO.OOOOOO" +
+        "O............O............O" +
+        "O.OOOO.OOOOO.O.OOOOO.OOOO.O" +
+        "O...OO...............OO...O" +
+        "OOO.OO.OO.OOOOOOO.OO.OO.OOO" +
+        "O......OO....O....OO......O" +
+        "O.OOOOOOOOOO.O.OOOOOOOOOO.O" +
+        "O.........................O" +
+        "OOOOOOOOOOOOOOOOOOOOOOOOOOO";
 
         public GameLoop()
         {
             physicsObjects.Add(snake);
             ConvertMapToDoubleArray();
             GenerateMap();
-            ghost = new Ghost(2, 1, physicsObjects);
+            redGhost = new Ghost(2, 1, physicsObjects);
             col = new PhysicsCollision(physicsObjects);
             direction = Dir.none;
 
@@ -108,8 +85,9 @@ namespace GameLoop
                 Render();
             }
         }
-        List<MapPiece> path = new List<MapPiece>();
+        List<Vector2> pathRed = new List<Vector2>();
         int counter = 0;
+        int timer = 0;
         private void ProcessInput()
         {
             if (input.TryTake(out ConsoleKey key))
@@ -138,19 +116,17 @@ namespace GameLoop
 
             snake.Visuals = snake.Visuals == 'o' ? 'c' : 'o';
         }
-        int timer = 0;
         private void Update()
         {
             if (direction != Dir.none)
             {
                 timer++;
-                if (path != null && timer > 10)
+                if (pathRed != null && timer > 1)
                 {
                     timer = 0;
-                    if (counter < path.Count)
+                    if (counter < pathRed.Count)
                     {
-                        ghost.PosX = path[counter].PosX;
-                        ghost.PosY = path[counter].PosY;
+                        redGhost.position = pathRed[counter];
 
                         counter++;
                     }
@@ -162,7 +138,7 @@ namespace GameLoop
                     case Dir.up:
                         if (col.CheckCollisions(snake, 0, -1) != typeof(Map))
                         {
-                            snake.PosY = Math.Max(0, snake.PosY - 1);
+                            snake.position = new Vector2(snake.position.PosX ,Math.Max(0, snake.position.PosY - 1));
                             lastDirection = direction;
                         }
 
@@ -171,7 +147,7 @@ namespace GameLoop
                     case Dir.left:
                         if (col.CheckCollisions(snake, -1, 0) != typeof(Map))
                         {
-                            snake.PosX = Math.Max(0, snake.PosX - 1);
+                            snake.position = new Vector2(Math.Max(0, snake.position.PosX - 1), snake.position.PosY);
                             lastDirection = direction;
                         }
 
@@ -180,7 +156,7 @@ namespace GameLoop
                     case Dir.down:
                         if (col.CheckCollisions(snake, 0, 1) != typeof(Map))
                         {
-                            snake.PosY = Math.Min(db.YDim - 1, snake.PosY + 1);
+                            snake.position = new Vector2(snake.position.PosX, Math.Min(db.YDim - 1, snake.position.PosY + 1));
                             lastDirection = direction;
                         }
 
@@ -189,34 +165,38 @@ namespace GameLoop
                     case Dir.right:
                         if (col.CheckCollisions(snake, 1, 0) != typeof(Map))
                         {
-                            snake.PosX = Math.Min(db.XDim - 1, snake.PosX + 1);
+                            snake.position = new Vector2(Math.Min(db.XDim - 1, snake.position.PosX + 1), snake.position.PosY);
                             lastDirection = direction;
                         }
 
                         break;
                 }
 
-                path = ghost.CalcuatePath(snake);
+                pathRed = redGhost.CalcuatePath(snake);
+                counter = 0;
             }
 
             snake.UpdatePhysics(snake);
-            ghost.UpdatePhysics(ghost);
+
+            redGhost.UpdatePhysics(redGhost);
 
             if (col.CheckCollisions(snake) == typeof(Pellet))
             {
                 for (int i = 0; i < physicsObjects.Count; i++)
                 {
-                    if (physicsObjects[i].PosX == snake.PosX && physicsObjects[i].PosY == snake.PosY)
+                    if (physicsObjects[i].position.Equals(snake.position))
                     {
-                        //physicsObjects.RemoveAt(i);
-                        mapVisuals[snake.PosX, snake.PosY] = ' ';
+                        if (physicsObjects[i] != snake)
+                            physicsObjects[i] = new EmptySpace(snake.position.PosX, snake.position.PosY);
+                        mapVisuals[snake.position.PosX, snake.position.PosY] = ' ';
                     }
                 }
                 Score++;
             }
             if (col.CheckCollisions(snake) == typeof(Teleporter))
             {
-                snake.PosX = snake.PosX == 1 ? db.XDim - 2 : 2;
+                int toPlace = snake.position.PosX == 1 ? db.XDim - 2 : 2;
+                snake.position = new Vector2(toPlace, snake.position.PosY);
             }
 
             direction = Dir.none;
@@ -234,8 +214,9 @@ namespace GameLoop
                 }
             }
 
-            db[snake.PosX, snake.PosY] = snake.Visuals;
-            db[ghost.PosX, ghost.PosY] = ghost.Visuals;
+            db[snake.position.PosX, snake.position.PosY] = snake.Visuals;
+
+            db[redGhost.position.PosX, redGhost.position.PosY] = redGhost.Visuals;
 
             db.Swap();
 
@@ -278,19 +259,23 @@ namespace GameLoop
 
             for (int y = 0; y < 23; y++)
             {
-                for (int x = 0; x < 28; x++)
+                for (int x = 0; x < 27; x++)
                 {
                     if (mapVisuals[x, y] == 'O')
                     {
                         physicsObjects.Add(new Map(x, y, x + 1, y + 1));
                     }
-                    if (mapVisuals[x, y] == '.')
+                    else if (mapVisuals[x, y] == '.')
                     {
                         physicsObjects.Add(new Pellet(x, y));
                     }
-                    if (mapVisuals[x, y] == 'T')
+                    else if (mapVisuals[x, y] == 'T')
                     {
                         physicsObjects.Add(new Teleporter(x, y));
+                    }
+                    else if (mapVisuals[x,y] == ' ')
+                    {
+                        physicsObjects.Add(new EmptySpace(x, y));
                     }
                     charcount++;
                 }
@@ -303,7 +288,7 @@ namespace GameLoop
 
             for (int y = 0; y < 23; y++)
             {
-                for (int x = 0; x < 28; x++)
+                for (int x = 0; x < 27; x++)
                 {
                     mapVisuals[x, y] = mapBuilder[charcount];
                     charcount++;
