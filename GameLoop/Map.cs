@@ -1,6 +1,6 @@
 ﻿namespace GameLoop
 {
-    class Map : MapPiece
+    internal class Map : MapPiece
     {
         public Map(int x, int y, int l, int w)
         {

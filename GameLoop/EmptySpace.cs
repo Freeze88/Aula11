@@ -1,6 +1,6 @@
 ﻿namespace GameLoop
 {
-    class EmptySpace : MapPiece
+    internal class EmptySpace : MapPiece
     {
         public EmptySpace(int x, int y)
         {

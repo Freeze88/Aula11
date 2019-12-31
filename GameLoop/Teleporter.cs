@@ -1,6 +1,6 @@
 ﻿namespace GameLoop
 {
-    class Teleporter : MapPiece
+    internal class Teleporter : MapPiece
     {
         public Teleporter(int x, int y)
         {

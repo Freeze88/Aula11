@@ -1,6 +1,6 @@
 ﻿namespace GameLoop
 {
-    class Snake : MapPiece
+    internal class Snake : MapPiece
     {
         public Snake()
         {

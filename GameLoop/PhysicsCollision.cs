@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GameLoop
 {
-    class PhysicsCollision
+    internal class PhysicsCollision
     {
 
         private readonly List<MapPiece> colliders;

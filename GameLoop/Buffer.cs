@@ -2,7 +2,7 @@
 
 namespace GameLoop
 {
-    class Buffer<T>
+    internal class Buffer<T>
     {
         private T[,] _current;
         private T[,] _next;

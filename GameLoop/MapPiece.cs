@@ -1,24 +1,24 @@
 ﻿namespace GameLoop
 {
-    class MapPiece
+    internal class MapPiece
     {
         public int[] BoxCollider;
-        
+
         public Vector2 position;
         public char Visuals { get; set; }
 
         public int g_Cost = 0;
 
         public int h_Cost = 0;
-        public int f_Cost { get => g_Cost + h_Cost; }
+        public int f_Cost => g_Cost + h_Cost;
 
         public MapPiece parent;
-        public void UpdatePhysics(MapPiece s)
+        public void UpdatePhysics()
         {
-            BoxCollider[0] = s.position.PosX;
-            BoxCollider[1] = s.position.PosY;
-            BoxCollider[2] = s.position.PosX + 1;
-            BoxCollider[3] = s.position.PosY + 1;
+            BoxCollider[0] = position.PosX;
+            BoxCollider[1] = position.PosY;
+            BoxCollider[2] = position.PosX + 1;
+            BoxCollider[3] = position.PosY + 1;
         }
     }
 }

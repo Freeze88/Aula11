@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GameLoop
+﻿namespace GameLoop
 {
-    struct Vector2
+    internal struct Vector2
     {
         public int PosX { get; }
         public int PosY { get; }
