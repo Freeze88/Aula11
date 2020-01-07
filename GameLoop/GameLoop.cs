@@ -23,7 +23,6 @@ namespace GameLoop
         private readonly EmptySpace ghostTarget;
 
         private readonly EmptySpace redCorner = new EmptySpace(25, 1);
-        private readonly EmptySpace pinkCorner = new EmptySpace(1, 1);
 
         private List<Vector2> pathRed = new List<Vector2>();
         private List<Vector2> pathPink = new List<Vector2>();
